@@ -15,8 +15,8 @@ import prontosoccorso.ProntoSoccorso;
  */
 public class TestPS {
    public static void main(String[] args) throws IOException {
-      int med=2;
-      int inf=2;
+      int med=3;
+      int inf=3;
       int tec = 1;
       int bed = 3;
       ProntoSoccorso ps = new ProntoSoccorso(med, inf, tec, bed, "dati/emergenze.txt");

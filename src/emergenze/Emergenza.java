@@ -46,12 +46,10 @@ public class Emergenza implements Comparable {
    @Override
    public int compareTo(Object o) {
       Emergenza e = (Emergenza) o;
-      if (e.getOraArrivo() < this.getOraArrivo()) {
-         return 1;
-      } else if (e.getOraArrivo() > this.getOraArrivo()) {
-         return -1;
-      } else {
-         return e.getPriorita() - getPriorita();
+      if (this.getColore().equals(e.getColore())){
+          return this.getOraArrivo() - e.getOraArrivo();
+      }else{
+          return this.getColore().compareTo(e.getColore());
       }
    }
 
