@@ -1,0 +1,5 @@
+SSSSSS	Rosso	10
+AAAAAA	Rosso	50
+EEEEEE	Rosso	96
+FFFFFF	Rosso	101
+LLLLLL	Rosso	320

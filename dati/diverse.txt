@@ -1,0 +1,5 @@
+SSSSSS	Giallo	10
+AAAAAA	Rosso	10
+EEEEEE	Bianco	10
+FFFFFF	Verde	101
+LLLLLL	Rosso	320
