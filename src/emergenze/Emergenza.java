@@ -52,6 +52,8 @@ public class Emergenza implements Comparable {
           return this.getColore().compareTo(e.getColore());
       }
    }
+   
+//   public Comparator<Emergenza> 
 
    @Override
    public boolean equals(Object obj) {

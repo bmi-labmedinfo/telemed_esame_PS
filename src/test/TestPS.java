@@ -18,7 +18,7 @@ public class TestPS {
       int med=3;
       int inf=3;
       int tec = 1;
-      int bed = 3;
+      int bed = 5;
       ProntoSoccorso ps = new ProntoSoccorso(med, inf, tec, bed, "dati/emergenze.txt");
       int time = 450;
       ps.simula(time);
