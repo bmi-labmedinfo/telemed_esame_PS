@@ -18,6 +18,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -84,10 +86,19 @@ public class ProntoSoccorso {
                     c = CodiceColore.ROSSO;
                     break;
             }
-            emergenzeFile.add(new Emergenza(line.split("\t")[0],
-                    Integer.parseInt(line.split("\t")[2]),
-                    c));
+            try {
+                if (risorseDisponibili(c)) {
+                    emergenzeFile.add(new Emergenza(line.split("\t")[0],
+                            Integer.parseInt(line.split("\t")[2]),
+                            c));
+                } else {
+                    throw new EmergenzaIntrattabileException();
+                }
+            } catch (EmergenzaIntrattabileException e) {
+                System.out.println(e.getMessage());
+            }
         }
+
     }
 
     private void gestisciEmergenze(int tempo) {
@@ -103,17 +114,15 @@ public class ProntoSoccorso {
             gestisciEmergenze(t);
             currentTime++;
         }
+        currentTime--;
     }
 
     public void fineGiornata() {
-        setEmergenzeInArrivo(emergenzeFile);
-        currentTime = 0;
-        for (int t = 0;; t++, currentTime++) {
-            if (isEmergenzeNotClosed()) {
-                gestisciEmergenze(t);
-            }
+        resetSimulazione();
+        for (int t = 0; isEmergenzeNotClosed(); t++, currentTime++) {
+            aggiungiInCoda(t);
+            gestisciEmergenze(t);
         }
-
     }
 
     private boolean risorseDisponibili(CodiceColore colore) {
@@ -191,7 +200,6 @@ public class ProntoSoccorso {
             if (risorseDisponibili(e.getColore())) {
                 inCarico(e, tempo);
                 toRemove.add(e);
-
             }
         }
         emergenzeIn.removeAll(toRemove);
@@ -218,12 +226,13 @@ public class ProntoSoccorso {
     }
 
     private boolean isEmergenzeNotClosed() {
-        for (Emergenza e : emergenzeIn) {
-            if (!e.getStato().equals(Stato.CHIUSO)) {
-                return false;
+        int nchiuse=0;
+        for (Pratica e : pratiche) {
+            if (e.getStato().equals(Stato.CHIUSO)) {
+                nchiuse++;
             }
         }
-        return true;
+        return nchiuse!=emergenzeFile.size();
     }
 
     private void aggiungiInCoda(int t) {
