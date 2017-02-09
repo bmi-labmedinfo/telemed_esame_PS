@@ -58,10 +58,6 @@ public class ProntoSoccorso {
       currentTime = 0;
    }
 
-   private void setEmergenzeInArrivo(Set<Emergenza> e) {
-      this.emergenzeInCoda = new TreeSet<>(e);
-   }
-
    private void caricaEmergenze(String file) throws IOException {
       BufferedReader in = new BufferedReader(new FileReader(file));
       String line, tokens[];
