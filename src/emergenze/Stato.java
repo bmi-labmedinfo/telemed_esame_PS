@@ -10,5 +10,5 @@ package emergenze;
  * @author cristianalarizza
  */
 public enum Stato {
-   ATTESA,TRATTAMENTO,CHIUSO;
+   ATTESA,TRATTAMENTO,CHIUSO;  
 }
